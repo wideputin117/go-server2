@@ -1,0 +1,48 @@
+// Online Go compiler to run Golang program online
+// Print "Try programiz.pro" message
+
+package main
+import "fmt"
+
+type gasEngine struct {
+    mpg     uint8
+	gallons uint8
+	owner
+	int
+}
+type owner struct{
+    name string
+}
+type electricEngine struct{
+    mpkh uint8
+    kph uint8
+}
+func (e gasEngine) milesLeft() uint8 {
+    return e.mpg*e.gallons
+}
+func (e electricEngine) milesLeft() uint8 {
+    return e.mpkh*e.kph
+}
+
+// using interfaces
+type engine interface {
+	milesLeft() uint8
+}
+func canMakeIt(e engine,miles uint8) {
+    if miles <= e.milesLeft() {
+        fmt.Println("You can make it there")
+    }else{
+        fmt.Println("you will not make it there")
+    }
+}
+
+func main() {
+ var myEngine gasEngine = gasEngine{25,34,owner{"alex"}, 10}
+ fmt.Println(myEngine.mpg, myEngine.gallons,myEngine.milesLeft())
+ 
+ var newEngine electricEngine = electricEngine{25,7}
+ canMakeIt(newEngine,0)
+ var newEngine2 gasEngine = gasEngine{1,7,owner{"Manish"},10}
+ canMakeIt(newEngine2,10)
+ fmt.Println("Try programiz.pro")
+}
