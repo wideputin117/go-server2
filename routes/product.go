@@ -9,10 +9,13 @@ import (
 // RegisterProductRoutes registers product-related routes
 func RegisterProductRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/products", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == http.MethodPost {
-			controllers.CreateProduct(w, r)
-			return
+		switch r.Method {
+		case http.MethodPost:
+			controllers.CreateProduct(w, r) // Create a new product
+		case http.MethodGet:
+			controllers.GetProducts(w, r) // Get all products
+		default:
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	})
 }
