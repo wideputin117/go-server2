@@ -18,7 +18,7 @@ func main() {
 
 	// Register routes
 	routes.RegisterProductRoutes(mux)
-
+	routes.RegisterUserRoutes(mux)
 	// Start HTTP server
 	fmt.Println("🚀 Server is running on port 8080...")
 	log.Fatal(http.ListenAndServe(":8080", mux))
