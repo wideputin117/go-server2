@@ -7,6 +7,7 @@ import (
 
 	"example.com/go-server/database"
 	"example.com/go-server/routes"
+	"github.com/gorilla/mux" // ✅ Use Gorilla Mux
 )
 
 func main() {
@@ -14,12 +15,12 @@ func main() {
 	database.ConnectDB()
 
 	// Create a new router (multiplexer)
-	mux := http.NewServeMux()
+	router := mux.NewRouter()
 
 	// Register routes
-	routes.RegisterProductRoutes(mux)
-	routes.RegisterUserRoutes(mux)
+	routes.RegisterProductRoutes(router)
+	routes.RegisterUserRoutes(router)
 	// Start HTTP server
 	fmt.Println("🚀 Server is running on port 8080...")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Fatal(http.ListenAndServe(":8080", router))
 }

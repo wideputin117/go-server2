@@ -1,19 +1,12 @@
 package routes
 
 import (
-	"net/http"
+	"github.com/gorilla/mux" // ✅ Use Gorilla Mux
 
 	"example.com/go-server/controllers"
 )
 
-func RegisterUserRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("/user/signup", func(w http.ResponseWriter, r *http.Request) {
-		switch r.Method {
-		case http.MethodPost:
-			controllers.RegisterUser(w, r)
-
-		default:
-			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		}
-	})
+func RegisterUserRoutes(router *mux.Router) {
+	router.HandleFunc("/user/signup", controllers.RegisterUser).Methods("POST")
+	router.HandleFunc("/user/profile/{id}", controllers.GetUserDetails).Methods("GET")
 }
