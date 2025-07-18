@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/gorilla/mux" // ✅ Use Gorilla Mux
+	"github.com/gorilla/mux" // 
 
 	"example.com/go-server/controllers"
 )
